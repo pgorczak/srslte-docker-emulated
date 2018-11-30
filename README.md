@@ -11,8 +11,8 @@ See it happen with
 
 After a while you'll se the UE attach:
 
-    srsue1_1  | Network attach successful. IP: 172.16.0.2
-    shmem-srsenb | User 0x46 connected
+    virtual-srsue | Network attach successful. IP: 172.16.0.2
+    virtual-srsenb | User 0x46 connected
 
 Now you can test the connection in a new terminal:
 
