@@ -1,8 +1,9 @@
 # srslte-docker-emulated
 
-This is a minimal example of an end-to-end LTE system running with Docker and
-shared memory. Core network, base station and user device all run in separate
-containers. The air interface is emulated via radio samples in shared memory.
+This is a minimal example of an end-to-end [srsLTE] system running with Docker
+and shared memory. Core network, base station and user device all run in
+separate containers. The air interface is emulated via radio samples in shared
+memory.
 
 See it happen with
 
@@ -24,6 +25,7 @@ Now you can test the connection in a new terminal:
 and to [FabianEckermann] for figuring out how to integrate it with Docker's IPC
 functionality.*
 
+[srsLTE]: https://github.com/srsLTE/srsLTE
 [jgiovatto]: https://github.com/jgiovatto
 [FabianEckermann]: https://github.com/FabianEckermann
 
