@@ -20,9 +20,12 @@ Now you can test the connection in a new terminal:
     64 bytes from 172.16.0.2: icmp_seq=1 ttl=64 time=25.3 ms
     64 bytes from 172.16.0.2: icmp_seq=2 ttl=64 time=24.2 ms
 
-*Credits go to @jgiovatto for implementing the shared memory radio interfaces
-and to @FabianEckermann for figuring out how to integrate it with Docker's IPC
+*Credits go to [jgiovatto] for implementing the shared memory radio interfaces
+and to [FabianEckermann] for figuring out how to integrate it with Docker's IPC
 functionality.*
+
+[jgiovatto]: https://github.com/jgiovatto
+[FabianEckermann]: https://github.com/FabianEckermann
 
 **A note on configuration:** During build, the example config files are copied
 into the workdir. These are the files you see used in the compose file with some
