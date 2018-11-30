@@ -1,0 +1,54 @@
+version: '2.2'
+
+services:
+  srsepc:
+    container_name: virtual-srsepc
+    build: .
+    command:
+      - srsepc
+      - epc.conf
+      - --mme.mme_bind_addr=10.80.95.10
+      - --spgw.gtpu_bind_addr=10.80.95.10
+    networks:
+      corenet:
+        ipv4_address: 10.80.95.10
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/net/tun
+  srsenb:
+    container_name: virtual-srsenb
+    build: .
+    command:
+      - srsenb
+      - enb.conf.fauxrf
+      - --enb.mme_addr=10.80.95.10
+      - --enb.gtp_bind_addr=10.80.95.11
+      - --enb.s1c_bind_addr=10.80.95.11
+      - --enb_files.sib_config=sib.conf
+    networks:
+      corenet:
+        ipv4_address: 10.80.95.11
+    ipc: shareable
+    cap_add:
+      - SYS_NICE
+  srsue:
+    container_name: virtual-srsue
+    build: .
+    command: "srsue ue.conf.fauxrf"
+    ipc: "container:virtual-srsenb"
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/net/tun
+    depends_on:
+      - srsenb
+
+networks:
+  corenet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.80.95.0/24
