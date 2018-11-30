@@ -33,4 +33,8 @@ functionality.*
 into the workdir. These are the files you see used in the compose file with some
 option overrides. If you want to play around with the config yourself, it is
 much easier to place your custom files in this directory and `ADD` them in the
-Dockerfile.
+Dockerfile. You can find the exact versions in [srsepc], [srsenb] and [srsue].
+
+[srsepc]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsepc
+[srsenb]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsenb
+[srsue]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsue
