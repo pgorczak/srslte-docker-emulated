@@ -38,3 +38,7 @@ Dockerfile. You can find the exact versions in [srsepc], [srsenb] and [srsue].
 [srsepc]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsepc
 [srsenb]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsenb
 [srsue]: https://github.com/jgiovatto/srsLTE/tree/5d82f19988bc148d7f4cec7a0f29184375a64b40/srsue
+
+**Adding UEs:** The compose file contains an optional second UE. It uses the
+second IMSI from the default user_db.csv (srsEPC). To add more UEs, add IMSIs to
+the csv and tell the UEs to use them.

@@ -1,5 +1,18 @@
 version: '2.2'
 
+x-srsue:
+  &ue-settings
+  build: .
+  command: "srsue ue.conf.fauxrf"
+  ipc: "container:virtual-srsenb"
+  cap_add:
+    - NET_ADMIN
+    - SYS_NICE
+  devices:
+    - /dev/net/tun
+  depends_on:
+    - srsenb
+
 services:
   srsepc:
     container_name: virtual-srsepc
@@ -34,17 +47,12 @@ services:
     cap_add:
       - SYS_NICE
   srsue:
+    << : *ue-settings
     container_name: virtual-srsue
-    build: .
-    command: "srsue ue.conf.fauxrf"
-    ipc: "container:virtual-srsenb"
-    cap_add:
-      - NET_ADMIN
-      - SYS_NICE
-    devices:
-      - /dev/net/tun
-    depends_on:
-      - srsenb
+  # srsue2:
+  #   << : *ue-settings
+  #   container_name: virtual-srsue2
+  #   command: "srsue ue.conf.fauxrf --usim.imsi=001010123456780"
 
 networks:
   corenet:
