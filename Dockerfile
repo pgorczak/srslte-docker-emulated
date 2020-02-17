@@ -17,6 +17,8 @@ RUN apt-get update \
      libconfig++-dev \
      curl \
      iputils-ping \
+     iproute2 \
+     iptables \
      unzip \
  && rm -rf /var/lib/apt/lists/*
 

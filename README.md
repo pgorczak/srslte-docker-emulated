@@ -42,3 +42,30 @@ Dockerfile. You can find the exact versions in [srsepc], [srsenb] and [srsue].
 **Adding UEs:** The compose file contains an optional second UE. It uses the
 second IMSI from the default user_db.csv (srsEPC). To add more UEs, add IMSIs to
 the csv and tell the UEs to use them.
+
+### Internet access for UEs
+
+By default, containers are attached to a Docker network with a default
+route. This means everyone has internet access through the virtualized Docker
+network. It takes two extra steps to make UEs access the internet through the
+EPC instead. First configure network address translation at the EPC
+
+    docker exec virtual-srsepc iptables -t nat -A POSTROUTING -s 172.16.0.0/24 -o eth0 -j MASQUERADE
+
+This will masquerade all forwarded traffic from UEs (matched by source IP
+address) leaving the EPC's eth0 (Docker) interface.
+
+Second, tell the UE to route traffic via the EPC by default
+
+    docker exec virtual-srsue ip route replace default via 172.16.0.1
+
+Now you have network access through the EPC
+
+    docker exec virtual-srsue ping google.com
+
+You can verify that this ping is using the LTE connection by checking whether
+it has about 20 ms added latency due to uplink scheduling or by waiting until
+the UE enters "RRC IDLE" state, in which your ping command will trigger a
+random access and connection setup. The UE enters that state after one minute
+of not having sent or received any data through the LTE connection, so make
+sure no pings are running.
